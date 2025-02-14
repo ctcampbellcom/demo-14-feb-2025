@@ -1,0 +1,32 @@
+name: Policy As Code Licensing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  licensing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Advance Security Compliance Action
+        uses: advanced-security/policy-as-code@v2.7.2
+        with:
+          # We'll need an access token that can call the GraphQL GitHub API to get
+          #  all the of the licensing data.
+          token: ${{ secrets.GITHUB_TOKEN}}
+          # Disable everything else to check for and focus on licensing
+          argvs: "--disable-dependabot --disable-secret-scanning --disable-code-scanning"
+          # The path to the policy file
+          policy-path: .github/policies/licensing.yml

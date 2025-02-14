@@ -1,0 +1,22 @@
+name: "EPSS review"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  vulnerability_alerts: read
+
+jobs:
+  epss-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: advanced-security/dependabot-epss-action@enhance-debug
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          epss-threshold: "0.6"

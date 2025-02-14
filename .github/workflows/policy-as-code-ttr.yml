@@ -1,0 +1,30 @@
+name: Policy As Code Time to Remediate
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  ttr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Advance Security Compliance Action
+        uses: advanced-security/policy-as-code@v2.7.2
+        with:
+          # We'll need an access token that can call the GraphQL GitHub API to get
+          #  all the of the licensing data.
+          token: ${{ secrets.GITHUB_TOKEN}}
+          # The path to the policy file
+          policy-path: .github/policies/time-to-remediate.yml

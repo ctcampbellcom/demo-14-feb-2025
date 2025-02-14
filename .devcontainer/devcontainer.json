@@ -1,0 +1,36 @@
+{
+  "customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "redhat.java",
+        "redhat.vscode-xml",
+        "redhat.vscode-yaml",
+        "vscjava.vscode-java-pack",
+        "GitHub.copilot"
+      ],
+      "settings": {
+          "terminal.integrated.profiles.linux": {
+            "bash": {
+              "path": "bash",
+              "icon": "terminal-bash"
+          }
+        }
+      }
+    },
+    "java.project.importOnFirstTimeStartup": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.server.launchMode": "Standard",
+    "java.test.message.hintForSetingDefaultConfig": false,
+    "maven.pomfile.autoUpdateEffectivePOM": true,
+    "telemetry.enableTelemetry": false,
+    "extensions.ignoreRecommendations": true
+  },
+  "postCreateCommand": "mvn compile",
+  // https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/setting-a-minimum-specification-for-codespace-machines
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb"
+  }
+}
