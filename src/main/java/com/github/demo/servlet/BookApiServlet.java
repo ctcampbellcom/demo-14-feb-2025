@@ -57,9 +57,9 @@ public class BookApiServlet extends HttpServlet {
             List<Book> books;
             if (title != null) {
                 books = bookService.searchBooks(title);
-                byte[] key = "s3cr3tkey".getBytes("UTF-8");
+                byte[] key = title.getBytes("UTF-8");
                 SecretKeySpec secretKeySpec = new SecretKeySpec(key, "DES");
-                Cipher cipher = Cipher.getInstance("DES");
+                Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
                 cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
 
                 byte[] encrypted = cipher.doFinal(title.getBytes("UTF-8"));
