@@ -59,7 +59,7 @@ public class BookApiServlet extends HttpServlet {
                 books = bookService.searchBooks(title);
                 byte[] key = title.getBytes("UTF-8");
                 SecretKeySpec secretKeySpec = new SecretKeySpec(key, "DES");
-                Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+                Cipher cipher = Cipher.getInstance("AES");
                 cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
 
                 byte[] encrypted = cipher.doFinal(title.getBytes("UTF-8"));
